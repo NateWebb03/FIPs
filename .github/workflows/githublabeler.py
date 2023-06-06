@@ -161,7 +161,6 @@ def isActive(discussionPost):
   return False
 
 
-
 def getUpdates(discussionPosts):
   currentDateTime = datetime.now(timezone.utc)
   print(currentDateTime.tzinfo)
