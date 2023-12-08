@@ -226,14 +226,17 @@ def updateLabels(updatesList, client):
 
 def main():
     transport = AIOHTTPTransport(
-        url='https://api.github.com/graphql',
-        headers={'Authorization': f'Bearer {GITHUB_TOKEN}'}
+    url='https://api.github.com/graphql',
+    headers={'Authorization': f'Bearer {GITHUB_TOKEN}'}
     )
     client = Client(transport=transport, fetch_schema_from_transport=True)
-    discussions = getAllDiscussions(client)
-    now = datetime.now(timezone.utc)
-    updates = getUpdates(discussions, now)
-    updateLabels(updates, client)
+    try:
+        discussions = getAllDiscussions(client)
+        now = datetime.now(timezone.utc)
+        updates = getUpdates(discussions, now)
+        updateLabels(updates, client)
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
     main()
